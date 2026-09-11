@@ -41,7 +41,7 @@ document.querySelectorAll(".navbar a").forEach(link => {
 
 
 // =========================
-// BOOKING FORM
+// WIZTEC WHATSAPP BOOKING
 // =========================
 
 const bookingForm = document.getElementById("bookingForm");
@@ -50,11 +50,40 @@ bookingForm.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
-    alert(
-        "Thank you for your booking request! " +
-        "Wiztec Sounds System will contact you shortly."
-    );
+    // Replace this with the Wiztec WhatsApp number
+    // Country code first, without + or spaces.
+    const whatsappNumber = "23280957763";
 
-    bookingForm.reset();
+    // Get form information
+    const name = bookingForm.querySelector('input[type="text"]').value;
+    const phone = bookingForm.querySelector('input[type="tel"]').value;
+    const eventType = bookingForm.querySelector('select').value;
+    const date = bookingForm.querySelector('input[type="date"]').value;
+    const message = bookingForm.querySelector('textarea').value;
+
+    // Create WhatsApp message
+    const whatsappMessage = `
+🎧 *WIZTEC SOUNDS SYSTEM*
+📅 *NEW BOOKING REQUEST*
+
+👤 *Name:* ${name}
+📞 *Phone:* ${phone}
+🎉 *Event:* ${eventType}
+📆 *Date:* ${date}
+
+📝 *Event Details:*
+${message}
+
+Please contact me regarding this booking.
+
+— Sent from Wiztec Sounds System Website
+`;
+
+    // Create WhatsApp URL
+    const whatsappURL =
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+    // Open WhatsApp
+    window.open(whatsappURL, "_blank");
 
 });
